@@ -1,0 +1,1 @@
+{"version":3,"sources":["flashMessages.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"flashMessages.js","sourcesContent":["$(document).ready(function() {\n        window.setTimeout(\"fadeOutFlashMessages();\", 5000); //call fade in 3 seconds\n    }\n);\n\nfunction fadeOutFlashMessages() {\n    $(\".message-alert\").fadeOut('slow');\n}"]}

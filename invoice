@@ -1,0 +1,17 @@
+﻿Insert Into invoice(invoice_id, date_of_delivery, provider)
+Values
+(Default, '13-04-2018', 1),
+(Default, '21-03-2018', 2),
+(Default, '01-05-2018', 3),
+(Default, '18-06-2018', 10),
+(Default, '22-05-2018', 12),
+(Default, '13-04-2018', 11),
+(Default, '02-03-2018', 4),
+(Default, '27-02-2018', 5),
+(Default, '19-04-2018', 6),
+(Default, '03-03-2018', 11),
+(Default, '28-01-2018', 7),
+(Default, '06-02-2018', 8),
+(Default, '24-03-2018', 9);
+
+

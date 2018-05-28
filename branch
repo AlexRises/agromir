@@ -1,0 +1,5 @@
+﻿Insert Into branch (branch_id, director, city, address)
+Values
+(DEFAULT, 1, 'Vinnytsa', '21034,Keletska,45'),
+(DEFAULT, 18, 'Kherson', '73103,Tyraspolska,14'),
+(DEFAULT, 37, 'Odessa', '(65112,Kanatnaya,78)');

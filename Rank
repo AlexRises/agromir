@@ -1,0 +1,44 @@
+﻿WITH
+filled_squares AS(SELECT (plant_culture_id) as pci, (amount_of_planted_lands_in_ha) as ampl 
+FROM plant_culture
+Order by amount_of_planted_lands_in_ha DESC),
+
+rank_filled_squares AS(Select fq.pci,fq.ampl, DENSE_RANK()OVER(ORDER BY fq.ampl DESC)
+AS rank_fileed_squares
+FROM filled_squares AS fq),
+
+
+avg_outcome AS (SELECT DISTINCT pc.plant_culture_id,
+AVG(inp.amount::numeric * inp.price::numeric) OVER (PARTITION BY pc.plant_culture_id, 
+EXTRACT(Year from inv.date_of_delivery)) avg_for_year
+FROM(((product as pr JOIN invoice_products as inp 
+ON pr.product_id = inp.product) JOIN invoice as inv
+ON inp.invoice = inv.invoice_id) JOIN product_plant_culture as pcp
+ON pr.product_id = pcp.product_id) RIGHT JOIN plant_culture as pc
+ON pcp.plant_culture_id = pc.plant_culture_id),
+
+rank_avg_outcome AS( SELECT (pr.plant_culture_id) as pci, pr.avg_for_year, DENSE_RANK() OVER(ORDER BY pr.avg_for_year DESC)
+AS rank_avg_outcome
+FROM avg_outcome as pr),
+
+avg_income AS(Select pr.plant_culture_id, pr.productivity_of_land_in_tons,
+AVG(inp.price::numeric * pr.productivity_of_land_in_tons) OVER (PARTITION BY pr.plant_culture_id, 
+EXTRACT(Year from pr.terms_of_cleaning)) avg_income
+from ((plant_culture as pr JOIN product_plant_culture as pcp
+ON pr.plant_culture_id = pcp.plant_culture_id) JOIN product as pro
+ON pcp.product_id = pro.product_id) LEFT JOIN invoice_products as inp
+ON pro.product_id = inp.product
+WHERE pro.type = 'Seeds'
+GROUP by pr.plant_culture_id, inp.price
+Order by pr.plant_culture_id),
+
+rank_avg_income AS(SELECT (pr.plant_culture_id) as pci, pr.avg_income, DENSE_RANK() OVER(ORDER BY pr.avg_income DESC)
+AS rank_avg_income
+FROM avg_income as pr)
+
+SELECT pc.plant_culture_id, rfs.ampl, rfs.rank_fileed_squares, rao.avg_for_year, rao.rank_avg_outcome, rai.avg_income, rai.rank_avg_income
+FROM  rank_filled_squares as rfs, plant_culture as pc, 
+rank_avg_outcome as rao, rank_avg_income as rai
+WHERE pc.plant_culture_id = rfs.pci AND rfs.pci = pc.plant_culture_id AND pc.plant_culture_id = rao.pci 
+AND pc.plant_culture_id = rai.pci
+ORDER BY pc.plant_culture_id

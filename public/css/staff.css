@@ -1,0 +1,96 @@
+.staff h1 {
+  margin-top: 50px; }
+
+.flex-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%; }
+
+.flex-item-half {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: calc(50% - 10px);
+  margin: 20px 0 10px 10px;
+  background: white;
+  padding-bottom: 30px;
+  border-radius: 5px;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.15); }
+  .flex-item-half:first-child {
+    margin-left: 0;
+    margin-right: 10px; }
+
+.flex-item-half-heading {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500; }
+
+.space-between {
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+
+.table-light {
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+.table-light-heading {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  background-color: lightgrey;
+  min-height: 30px; }
+
+.table-light-content {
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 0;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  list-style: none; }
+  .table-light-content li {
+    min-height: 30px;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 5px 0;
+    width: 100%;
+    border-top: 1px solid #e9ecef;
+    color: #72777a; }
+    .table-light-content li:nth-child(odd) {
+      background-color: rgba(0, 0, 0, 0.05); }
+    .table-light-content li:last-child {
+      border-bottom: 1px solid #e9ecef; }
+
+.profile-activator {
+  border: none;
+  outline: none;
+  background: transparent; }
+
+/*# sourceMappingURL=staff.css.map */

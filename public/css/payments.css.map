@@ -1,0 +1,1 @@
+{"version":3,"sources":["payments.scss"],"names":[],"mappings":"AAAA;EAEI,iBAAgB,EACjB","file":"payments.css","sourcesContent":[".payments {\n  h1 {\n    margin-top:50px;\n  }\n}"]}

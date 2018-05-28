@@ -1,0 +1,13 @@
+﻿INSERT INTO provider(provider_id, company, email, location, telephone, adress)
+VALUES (DEFAULT, 'Eridon', 'office@eridon.ua', 'Kyiv', '0(44)5018830', ('03124', 'Chornovola', '30')),
+(DEFAULT, 'Agrozahyst', 'azdonbas@gmail.com', 'Kyiv', '0(44)2053545', ('03185', 'Mashynobudivnykiv', '4В')),
+(DEFAULT, 'John Deere', 'Ukraine2@JohnDeere.com', 'Kyiv', '0(44)4065810', ('08130', 'Soborna', '1Б')),
+(DEFAULT, 'Agco', 'info.rus@agco-rm.ru', 'Moskva', '+74957300805', ('123022', 'Rochdelskaya', '15')),
+(DEFAULT, 'Amako', 'ukraine@amacoint.com', 'Kyiv', '0504484334', ('02089', 'Brovarska', '2')),
+(DEFAULT, 'TechnoTorg', 'odessa@technotorg.com', 'Odesa', '0487053129', ('65085', 'Tyraspolske shosse', '24')),
+(DEFAULT, 'OKKO', 'office@gng.com.ua', 'Kyiv', '0(44)3905770', ('04070', 'Naberezhno-Khreshchatitskaya', '15')),
+(DEFAULT, 'SOCAR Energy Ukraine', 'info@socar.ua', 'Kyiv', '0(44)2071010', ('01030', 'B.Khmelnytskogo', '52')),
+(DEFAULT, 'KhimAgro', 'khimagro@office.ua', 'Yuzhniy', '0(48)7374441', ('65481', 'Grigorevskogo desanta', '34/4')),
+(DEFAULT, 'OPZ', 'office@opz.odessa.ua', 'Yuzhniy', '0(48)7586009', ('65464', 'Zavodska', '3')),
+(DEFAULT, 'CherkasAzot', 'sale@azot.ck.ua', 'Cherkasy', '0472393889', ('18011', 'Pershomayska', '72')),
+(DEFAULT, 'EvroChim', 'sale@evrochim.com', 'Kyiv', '0(44)4905652', ('01133', 'Shchorsa', '44'));

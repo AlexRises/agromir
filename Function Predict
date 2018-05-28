@@ -1,0 +1,44 @@
+DROP FUNCTION predict_land(varchar, integer);
+
+CREATE FUNCTION predict_land(culture_name varchar, amount_of_planted_lands int)
+
+Returns TABLE (culture VARCHAR, amount_of_planted NUMERIC, amount_of_necessary_products INT) AS 
+$BODY$
+DECLARE 
+am_of_zem Numeric[];
+am_of_prdt Varchar[];
+prod_koef Numeric[];
+koef Numeric;
+BEGIN
+
+prod_koef = array(SElECT((SUM(inv.amount)::numeric)/(pc.amount_of_planted_lands_in_ha)::numeric) as division
+FROM (((plant_culture as pc JOIN product_plant_culture as prplc
+ON pc.plant_culture_id = prplc.plant_culture_id) JOIN product as pr
+ON prplc.product_id = pr.product_id)join invoice_products as inv
+ON pr.product_id = inv.product)
+GROUP by prplc.plant_culture_id, pc.amount_of_planted_lands_in_ha
+ORDER BY prplc.plant_culture_id);
+
+am_of_prdt = array(SElECT pc.culture_name
+FROM (((plant_culture as pc JOIN product_plant_culture as prplc
+ON pc.plant_culture_id = prplc.plant_culture_id) JOIN product as pr
+ON prplc.product_id = pr.product_id)join invoice_products as inv
+ON pr.product_id = inv.product)
+GROUP by pc.culture_name, pc.amount_of_planted_lands_in_ha
+ORDER BY pc.culture_name);
+
+For i in 1..array_length(prod_koef, 1) LOOP
+	if(culture_name = am_of_prdt[i]) THEN koef = prod_koef[i]; END IF;
+	
+	
+END LOOP;
+amount_of_necessary_products = $2 * koef;
+amount_of_planted = $2;
+culture = $1;
+RETURN NEXT;
+end
+$BODY$
+LANGUAGE 'plpgsql';
+
+
+SELECT * FROM predict_land('Barley Kherson', 17000)
