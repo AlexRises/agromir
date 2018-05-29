@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Technic;
 use DB;
 
-class TechnicController extends Controller
+
+class Product_Plant_CulturesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,44 +16,12 @@ class TechnicController extends Controller
      */
     public function index()
     {
-        $technic = DB::select('select * from technic_state()'); //Запрос в процедуру
-        $technic_type = DB::select('select DISTINCT type from technic_state()');
-//        $technic_branch = DB::select('select DISTINCT branch from technic_state()');
         
-        return view('technic', compact('technic'));
-    }
-
-    public function branch_filter()
-    {
-        $branch = request('branch'); //Фильтрация по филиалам
-
-
-////
     
+        $prod_plant = DB::select('select * from products_plant_culture()');
 
-
-
-        $technic = DB::select(('SELECT * FROM technic_state() where branch = ?'), $branch);//выбираю филиалы
-
-
-
-       return view('technic', compact('technic'));
-
-    }
-
-    public function technic_filter()//аналогично для типов техники
-    {
-
-        $type = request('technic');
-
-
-
-        $technic = DB::select(('SELECT * FROM technic_state() where type = ?'), $type);
-
-
-
-        return view('technic', compact('technic'));
-
+        return view('prod_plant_culture', compact('prod_plant'));
+    
     }
 
     /**
@@ -121,6 +89,4 @@ class TechnicController extends Controller
     {
         //
     }
-
-
 }

@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Technic;
+use App\Product;
+
 use DB;
 
-class TechnicController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,54 +17,25 @@ class TechnicController extends Controller
      */
     public function index()
     {
-        $technic = DB::select('select * from technic_state()'); //Запрос в процедуру
-        $technic_type = DB::select('select DISTINCT type from technic_state()');
-//        $technic_branch = DB::select('select DISTINCT branch from technic_state()');
+        $outcome = DB::select('select * from products_outcome()'); //Запрос в процедуру
+       
         
-        return view('technic', compact('technic'));
+        return view('products', compact('outcome'));
     }
+    
+   
 
-    public function branch_filter()
+    public function products_branch_filter()
     {
         $branch = request('branch'); //Фильтрация по филиалам
 
-
-////
-    
-
-
-
-        $technic = DB::select(('SELECT * FROM technic_state() where branch = ?'), $branch);//выбираю филиалы
+        
+        $outcome = DB::select(('SELECT * FROM products_outcome() where branch = ?'), $branch);//выбираю филиалы
 
 
 
-       return view('technic', compact('technic'));
+        return view('products', compact('outcome'));
 
-    }
-
-    public function technic_filter()//аналогично для типов техники
-    {
-
-        $type = request('technic');
-
-
-
-        $technic = DB::select(('SELECT * FROM technic_state() where type = ?'), $type);
-
-
-
-        return view('technic', compact('technic'));
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -121,6 +93,4 @@ class TechnicController extends Controller
     {
         //
     }
-
-
 }
