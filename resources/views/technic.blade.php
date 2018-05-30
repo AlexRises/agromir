@@ -73,13 +73,13 @@ $s = new Staff();*/
                         {{--                            @if($s->user->activated)--}}
                         <li class="table-list-item">
                             <div class="table-section-small">{{ $t->id or '?' }}</div>
-                            <div class="table-section-big">{{ $t->name or '?' }}</div>
-                            <div class="table-section">{{ $t->city or '?' }}</div>
+                            <div class="table-section-small">{{ $t->name or '?' }}</div>
+                            <div class="table-section-small">{{ $t->city or '?' }}</div>
                             {{--@if(!$role->isStaff()) --}}{{-- RESTRICTED FOR STAFF --}}
-                            <div class="table-section">{{ $t->necessary_parts or '?' }}</div>
+                            <div class="table-section-small">{{ $t->necessary_parts or '?' }}</div>
                             {{--@endif--}}
-                            <div class="table-section">{{ $t->condition or '?' }}</div>
-                            <div class="table-section">{{ $t->type or '?' }}</div>
+                            <div class="table-section-small">{{ $t->condition or '?' }}</div>
+                            <div class="table-section-small">{{ $t->type or '?' }}</div>
 
                             {{--<div class="table-section-small">--}}
                             {{--<input type="checkbox" name="activated" value="true"--}}

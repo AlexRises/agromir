@@ -32,3 +32,5 @@ Route::post('/products/products_branch_filter', 'ProductsController@products_bra
 Route::get('/plant_culture', 'Plant_CulturesController@index');
 
 Route::get('/prod_plant_culture', 'Product_Plant_CulturesController@index');
+
+Route::get('/invoice_add', 'InvoiceProductsController@index');

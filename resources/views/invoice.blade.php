@@ -11,6 +11,15 @@
 {{--<script src="/js/dashboard.js">--}}
 
 {{--</script>--}}
+<form action="/invoice_add">
+
+    <button class="table-add-block" onclick="" >
+        <i class="fas fa-plus"></i>
+        <span>Добавить</span>
+    </button>
+</form>
+
+
 
 <section id="orders">
     <div class="container">
@@ -33,12 +42,9 @@
                 @endforeach
             </ul>
 
-            {{--<button class="table-add-block" onclick="togglePopupAdd();">--}}
-                {{--<i class="fas fa-plus"></i>--}}
-                {{--<span>Добавить</span>--}}
-            {{--</button>--}}
 
-            {{--@include('popup.popup-order-edit')--}}
+
+            {{--@include('popup.popup-order-add')--}}
             {{--@include('popup.popup-order-add')--}}
 
             {{--{!! $orders->render() !!}--}}

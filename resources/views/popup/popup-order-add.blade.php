@@ -31,8 +31,8 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                {{--<input type="number" step="0.01" min="0" max="999999"--}}
-                       {{--name="amount" id="amount-add" placeholder="500.0" required>--}}
+                <input type="number" step="0.01" min="0" max="999999"
+                       name="amount" id="amount-add" placeholder="500.0" required>
             </div>
             <hr style="width: 100%">
             <div class="extra-products">
