@@ -4,15 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-Use App\Product;
-Use App\Invoice_Product;
-Use App\Invoice;
-Use App\Branch;
+use DB;
 
-Use DB;
-
-
-class InvoiceProductsController extends Controller
+class NewInvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,19 +15,8 @@ class InvoiceProductsController extends Controller
      */
     public function index()
     {
-        $products_prices = DB::select('select * from invoice_products_price()');
-
-        $plist = DB::select('select * from necessary_parts()');
-
         $provlist = DB::select('select * from providers()');
-
-        $invoice_info = DB::select('select * from invoices');
-
-        $inv_prod = DB::select('select * from invoice__products');
-        
-        $branch = DB::select('select * from branches');
-        
-        return view('invoice_add', compact('products_prices', 'plist', 'provlist','invoice_info', 'inv_prod', 'branch'));
+        return view ('new_invoice', compact('provlist'));
     }
 
     /**
@@ -54,23 +37,7 @@ class InvoiceProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $elements = count($request->product_id);
-        $i = 0;
-
-        for ($i; $i<$elements; $i += 1)
-        {
-            Invoice_Product::create([
-                'product'=>$request->product_id[ $i ],
-                 'amount'=>$request->quantity[ $i ],
-                'invoice'=>$request->invoice[ $i ],
-                'unit'=>request('units'),
-                'branch'=>$request->branch[ $i ]
-
-
-            ]);
-        };
-
-        return redirect ('/invoice');
+        //
     }
 
     /**

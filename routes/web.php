@@ -34,3 +34,9 @@ Route::get('/plant_culture', 'Plant_CulturesController@index');
 Route::get('/prod_plant_culture', 'Product_Plant_CulturesController@index');
 
 Route::get('/invoice_add', 'InvoiceProductsController@index');
+
+Route::get('/new_invoice', 'InvoiceController@newinvoice');
+
+Route::post('/new_invoice', 'InvoiceController@store');
+
+Route::post('/invoice_add', 'InvoiceProductsController@store');

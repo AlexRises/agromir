@@ -8,6 +8,8 @@ use App\Invoice;
 
 use DB;
 
+
+
 class InvoiceController extends Controller
 {
     /**
@@ -18,9 +20,34 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoice = DB::select('select * from invoice_state()');
+
         return view ('invoice', compact('invoice'));
+
     }
 
+    public function newinvoice()
+    {
+        $provlist = DB::select('select * from providers()');
+        return view ('new_invoice', compact('provlist'));
+    }
+
+//    public function makeInvoice(AddInvoiceRequest $request)
+//    {
+//        $elements = count($request->provider_id);
+//        $i = 1;
+//
+//        for ($i; $i<$elements; $i += 1)
+//        {
+//            Invoice::create([
+//                'date_of_delivery'=>$request->date_of_delivery,
+//                'provider'=>$request->provider_id[ $i ]
+//
+//
+//        ]);
+//        };
+
+//     
+//    }
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +55,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,6 +66,30 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+
+        $elements = count($request->provider_id);
+        $i = 0;
+
+        for ($i; $i<$elements; $i += 1)
+        {
+            Invoice::create([
+                'date_of_delivery'=>request('date_of_delivery'),
+                'provider'=>$request->provider_id[ $i ]
+
+
+            ]);
+        };
+
+//        foreach ($request->provider_id as $provider)
+//        {
+//            Invoice::create([
+//                'date_of_delivery'=>$request->date_of_delivery,
+//                'provider'=>$provider
+//            ]);
+//        }
+
+        return redirect ('/invoice');
+
         //
     }
 

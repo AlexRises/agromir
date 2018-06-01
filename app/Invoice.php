@@ -8,8 +8,9 @@ class Invoice extends Model
 {
     protected $table = 'invoices';
     protected $primaryKey = 'invoice_id';
+    public $timestamps = false;
 
-    protected $guarded = ['*'];
+    protected $guarded = [''];
 
     public function provide()
 

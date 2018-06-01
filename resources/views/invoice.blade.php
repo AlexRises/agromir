@@ -11,13 +11,22 @@
 {{--<script src="/js/dashboard.js">--}}
 
 {{--</script>--}}
+<form action="/new_invoice">
+
+    <button class="table-add-block" onclick="" >
+        <i class="fas fa-plus"></i>
+        <span>Добавить новый инвойс</span>
+    </button>
+</form>
+
 <form action="/invoice_add">
 
     <button class="table-add-block" onclick="" >
         <i class="fas fa-plus"></i>
-        <span>Добавить</span>
+        <span>Добавить продукты для заказа</span>
     </button>
 </form>
+
 
 
 

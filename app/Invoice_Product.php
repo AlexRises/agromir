@@ -8,8 +8,9 @@ class Invoice_Product extends Model
 {
     protected $table = 'invoice__products';
     protected $primaryKey = 'invoice_products_id';
+    public $timestamps = false;
 
-    protected $guarded = ['*'];
+    protected $guarded = [''];
 
     public function invoices()
 

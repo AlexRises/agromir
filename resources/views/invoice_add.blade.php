@@ -10,11 +10,13 @@
 <link rel="stylesheet" href="/css/dashboard.css">
 <h1 id="popup-heading">Добавление заказа</h1>
 
+<form class="popup-form" method="POST" action="/invoice_add">
+    {{ csrf_field() }}
 <div id="popupAdd" class="popup-orders">
-    <div class="popup-content">
-        <div class="popup-close">
-            <i class="fas fa-times" onclick="togglePopupAdd();"></i>
-        </div>
+    {{--<div class="popup-content">--}}
+        {{--<div class="popup-close">--}}
+            {{--<i class="fas fa-times" onclick="togglePopupAdd();"></i>--}}
+        {{--</div>--}}
         <div class="popup-form-row">
             <label for="product-add">
                     <span class="required" title="Required field">
@@ -23,22 +25,17 @@
             </label>
             <select name="product_id[]" id="product-add" required>
                 @foreach($products_prices as $pp)
-                    <option value="{{$pp->invoice_product_id}}">{{ $pp->product_name.' ('.$pp->price.'₴)' }} </option>
+                    <option value="{{$pp->product_id && $pp->price}}">{{ $pp->product_name.' ('.$pp->price.'₴)' }} </option>
+
                 @endforeach
             </select>
         </div>
-
-
-
-
         <div class="popup-form-row">
             <label for="quantity-add">
                     <span class="required" title="Required field">
                         Количество:
                     </span>
             </label>
-
-
             <select name="quantity[]" id="quantity-add">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -47,32 +44,43 @@
                 <option value="5">5</option>
             </select>
 
-        </div>
-
-        <div class="popup-form-row">
-            <label for="quantity-add">
-                    <span class="required" title="Required field">
-                           Дата:
-                    </span>
-            </label><input type="text" step="0.01" min="0" max="999999"
-                   name="amount" id="amount-add" placeholder="500.0" required>
-                <span class="required" title="Required field">
-                           Вводите дату в формате ГГ-ММ-ДД
-                    </span>
-            </div>
-
-        <div class="popup-form-row">
             <label for="product-add">
                     <span class="required" title="Required field">
-                        Поставщик:
+                        Счёт за :
                     </span>
             </label>
-            <select name="provider_id[]" id="product-add" required>
-                @foreach($provlist as $prov)
-                    <option value="{{$prov->id}}">{{ $prov->company }} </option>
+            <select name="invoice[]" id="product-add" required>
+                @foreach($invoice_info as $in)
+                    <option value="{{$in->invoice_id}}">{{'№ '. $in->invoice_id. ' Дата ( '. $in->date_of_delivery. ' )' }} </option>
+                @endforeach
+            </select>
+            <span class="required" title="Required field">
+                           Введите меру исчисления:
+                    </span>
+            <input type="text" class="form-control" id="title" name="units" placeholder="Введите меру">
+            <label for="product-add">
+                    <span class="required" title="Required field">
+                        Филиал:
+                    </span>
+            </label>
+            <select name="branch[]" id="product-add" required>
+                @foreach($branch as $b)
+                    <option value="{{$b->branch_id}}">{{$b->city}} </option>
                 @endforeach
             </select>
         </div>
+
+        <div class="popup-form-button">
+            <button class="table-add-block" onclick="" >
+                <i class="fas fa-plus"></i>
+                <span>Добавить новый заказ</span>
+            </button>
+        </div>
+    </div>
+    </div>
+</form>
+
+
 
         <section id="orders">
             <div class="container">
