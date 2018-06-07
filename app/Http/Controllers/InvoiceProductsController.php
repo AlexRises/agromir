@@ -27,7 +27,7 @@ class InvoiceProductsController extends Controller
 
         $provlist = DB::select('select * from providers()');
 
-        $invoice_info = DB::select('select * from invoices');
+        $invoice_info = DB::select('select * from invoice_provider()');
 
         $inv_prod = DB::select('select * from invoice__products');
         
@@ -56,6 +56,8 @@ class InvoiceProductsController extends Controller
     {
         $elements = count($request->product_id);
         $i = 0;
+//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+
 
         for ($i; $i<$elements; $i += 1)
         {
@@ -71,7 +73,31 @@ class InvoiceProductsController extends Controller
         };
 
         return redirect ('/invoice');
-    }
+
+
+//        $elements = count($request->product_id);
+//        $i = 0;
+//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+//
+//
+//        for ($i; $i<$elements; $i += 1)
+//        {
+//            Invoice_Product::create([
+//                'product'=>$request->product_id[ $i ],
+//                'amount'=>$request->quantity[ $i ],
+//                'price'=>$product_price,
+//                'invoice'=>$request->invoice[ $i ],
+//                'unit'=>request('units'),
+//                'branch'=>$request->branch[ $i ]
+//
+//
+//            ]);
+//        };
+//
+//        return redirect ('/invoice');
+//    }
+
+}
 
     /**
      * Display the specified resource.

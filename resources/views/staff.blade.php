@@ -17,7 +17,30 @@ $s = new Staff();*/
 <body>
 <link rel="stylesheet" href="/css/staff.css">
 <link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="/css/orders.css">
 <section id="staff">
+
+    <h3 align="center">Get Multiple Types And Branches</h3><br />
+    <h4>Select Branch and Type</h4><br />
+
+    <div class="popup-form-row">
+    <form method="post" action="/staff/staff_filter">
+        {{csrf_field()}}
+        <p><input type="checkbox" name="staff[]" value="Director" /> Director </p>
+        <p><input type="checkbox" name="staff[]" value="Chief Agronomist" /> Chief Agronomist </p>
+        <p><input type="checkbox" name="staff[]" value="Chief Accountant" /> Chief Accountant </p>
+        <p><input type="checkbox" name="staff[]" value="Chief Engineer" /> Chief Engineer </p>
+        <p><input type="checkbox" name="staff[]" value="Agronomist Chemist" /> Agronomist Chemist </p>
+        <p><input type="checkbox" name="staff[]" value="Engineers Machinery" />Engineers Machinery </p>
+        <p><input type="checkbox" name="staff[]" value="Accountant" /> Accountant </p>
+        <p><input type="checkbox" name="staff[]" value="Combine harvesters"/> Combine harvesters </p>
+
+        <p><input type="submit" name="submit_staff" class="btn btn-info" value="Submit Type" /></p>
+
+
+    </form>
+        </div>
+
     <div class="container">
         <div class="dashboard-content">
             <div class="staff table">

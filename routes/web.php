@@ -40,3 +40,9 @@ Route::get('/new_invoice', 'InvoiceController@newinvoice');
 Route::post('/new_invoice', 'InvoiceController@store');
 
 Route::post('/invoice_add', 'InvoiceProductsController@store');
+
+Route::get('/predict', 'Product_Plant_CulturesController@predindex');
+
+Route::post('/prod_plant_culture/culture_filter', 'Product_Plant_CulturesController@culture_filter');
+
+Route::post('/predict/result', 'Product_Plant_CulturesController@result');

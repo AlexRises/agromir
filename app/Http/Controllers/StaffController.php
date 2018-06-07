@@ -26,6 +26,22 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function staff_filter()//аналогично для типов техники
+    {
+
+
+        $type = request('staff');
+
+
+
+        $staff = DB::select(('select * from staff_state() where pos = ?'), $type);
+
+
+
+        return view('staff', compact('staff'));
+
+    }
     public function create()
     {
         //

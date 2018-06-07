@@ -29,13 +29,40 @@ $s = new Staff();*/
     {{--<p><input type="checkbox" name="branch[]" value="3" /> Odessa</p>--}}
     {{--<p><input type="submit" name="submit_branch" class="btn btn-info" value="Submit Branch" /></p>--}}
     {{--</form>--}}
+    <form action="/predict">
 
+        <button class="table-add-block" onclick="" >
+            <i class="fas fa-plus"></i>
+            <span>Просчитать</span>
+        </button>
+    </form>
 
+    <form method="post" action="/prod_plant_culture/culture_filter">
+        {{ csrf_field() }}
+    <div class="popup-form-row">
+    <select name="plant_culture_id" id="product-add">
+        @foreach($culture as $pp)
+            <option value="{{$pp->plant_culture_id}}">{{$pp->culture_name}} </option>
+        @endforeach
+    </select>
+        {{--<select name="branch" id="product-add" required>--}}
+            {{--@foreach($branch as $in)--}}
+                {{--<option value="{{$in->branch_id}}">{{$in->city}} </option>--}}
+            {{--@endforeach--}}
+        {{--</select>--}}
+        <div class="popup-form-button">
+            <button class="table-add-block" onclick="" >
+                <i class="fas fa-plus"></i>
+                <span>Отфильтровать</span>
+            </button>
+        </div>
+        </div>
+        </form>
 
     <div class="container">
         <div class="dashboard-content">
             <div class="staff table">
-                <h1>Активные сотрудники</h1>
+                <h1>Культуры</h1>
 
                 <div class="table-heading-black">
                     <div class="table-section-small">Product Name</div>

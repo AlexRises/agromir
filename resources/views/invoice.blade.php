@@ -36,16 +36,26 @@
             <h1>Заказы</h1>
             <div class="table-heading-black">
                 <div class="table-section-small">#</div>
-                <div class="table-section">Date</div>
-                <div class="table-section">Provider</div>
+                <div class="table-section-small">Part</div>
+                <div class="table-section-small">Date of Delivery</div>
+                <div class="table-section-small">Price</div>
+                <div class="table-section-small">Amount</div>
+                <div class="table-section-small">Unit</div>
+                <div class="table-section-small">Sum</div>
+                <div class="table-section-small">Branch</div>
 
             </div>
             <ul class="table-list">
                 @foreach($invoice as $in)
-                    <li class="table-list-item {{$in->id}}">
-                        <div class="table-section-small">{{ $in->id or '?' }}</div>
-                        <div class="table-section">{{ $in->date_of_delivery or '?'}}</div>
-                        <div class="table-section">{{ $in-> company}}</div>
+                    <li class="table-list-item {{$in->invoice_id}}">
+                        <div class="table-section-small">{{ $in->invoice_id or '?' }}</div>
+                        <div class="table-section-small">{{ $in->part or '?'}}</div>
+                        <div class="table-section-small">{{ $in->date_of_delivery}}</div>
+                        <div class="table-section-small">{{ $in->price}}</div>
+                        <div class="table-section-small">{{ $in->amount}}</div>
+                        <div class="table-section-small">{{ $in->unit}}</div>
+                        <div class="table-section-small">{{ $in->sum}}</div>
+                        <div class="table-section-small">{{ $in->provider}}</div>
 
                     </li>
                 @endforeach

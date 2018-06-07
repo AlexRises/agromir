@@ -25,11 +25,14 @@
             </label>
             <select name="product_id[]" id="product-add" required>
                 @foreach($products_prices as $pp)
-                    <option value="{{$pp->product_id && $pp->price}}">{{ $pp->product_name.' ('.$pp->price.'₴)' }} </option>
-
+                    <option value="{{$pp->product_id}}">{{ $pp->product_name.' ('.$pp->price.'₴)' }} </option>
                 @endforeach
             </select>
+
+
         </div>
+
+
         <div class="popup-form-row">
             <label for="quantity-add">
                     <span class="required" title="Required field">
@@ -51,7 +54,7 @@
             </label>
             <select name="invoice[]" id="product-add" required>
                 @foreach($invoice_info as $in)
-                    <option value="{{$in->invoice_id}}">{{'№ '. $in->invoice_id. ' Дата ( '. $in->date_of_delivery. ' )' }} </option>
+                    <option value="{{$in->invoice_id}}">{{'№ '. $in->invoice_id. ' Дата ( '. $in->date_of_delivery. ' ) от '. $in->provider}} </option>
                 @endforeach
             </select>
             <span class="required" title="Required field">
@@ -85,7 +88,7 @@
         <section id="orders">
             <div class="container">
                 <div class="orders table">
-                    <h1>Заказы</h1>
+                    <h1>Необходимые запчасти</h1>
                     <div class="table-heading-black">
                         <div class="table-section-small">Technic Name</div>
                         <div class="table-section">Necessary Parts</div>

@@ -19,7 +19,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoice = DB::select('select * from invoice_state()');
+        $invoice = DB::select('select * from invoice_advanced()');
 
         return view ('invoice', compact('invoice'));
 

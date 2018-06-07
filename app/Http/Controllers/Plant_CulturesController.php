@@ -17,6 +17,8 @@ class Plant_CulturesController extends Controller
     {
         $rank = DB::select('select * from rank_outcome();');
         return view('plant_culture', compact('rank'));
+
+
     }
 
     /**
@@ -37,7 +39,14 @@ class Plant_CulturesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $culture = request('culture_name');
+        $quantity = request('quantity');
+
+        $predict = DB::select(('select * from predic_land(?,?)'),$culture,$quantity);
+
+        return view ('predict', compact('predict'));
+
     }
 
     /**
@@ -71,7 +80,7 @@ class Plant_CulturesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

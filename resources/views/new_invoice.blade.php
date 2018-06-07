@@ -26,7 +26,7 @@
                         Поставщик:
                     </span>
     </label>
-<select name="provider_id[]" id="product-add" required>
+<select name="provider_id" id="product-add" required>
     @foreach($provlist as $prov)
         <option value="{{$prov->id}}">{{ $prov->company }} </option>
     @endforeach

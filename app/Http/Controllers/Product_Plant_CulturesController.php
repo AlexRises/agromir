@@ -19,9 +19,133 @@ class Product_Plant_CulturesController extends Controller
         
     
         $prod_plant = DB::select('select * from products_plant_culture()');
+        
+        $culture = DB::select('select * from plant__cultures');
 
-        return view('prod_plant_culture', compact('prod_plant'));
+        $branch = DB::select('select * from branches');
+
+        return view('prod_plant_culture', compact('prod_plant', 'culture', 'branch'));
     
+    }
+
+    public function predindex()
+
+    {
+        $cult = DB::select('select * from plant__cultures');
+
+        $prod_plant = DB::select('select * from products_plant_culture()');
+
+        return view ('predict', compact('cult', 'prod_plant'));
+
+    }
+
+
+    public function result()
+    {
+
+        $elements = [(request('culture_id'))];
+
+        dd($elements);
+
+        $quantity = (int)(request('quantity'));
+
+        $i = 0;
+//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+
+
+        for ($i; $i<$elements; $i += 1)
+        {
+
+
+            $predict = DB::select(('select * from predict_land(?,?)'),[request('culture_id')],$quantity);
+
+
+
+            $culture = DB::select('select * from plant__cultures');
+
+
+//            dd($culture)
+
+            return view('prod_plant_culture', compact('prod_plant', 'culture'));
+
+
+
+        };
+
+
+        $culture = request('culture_name');
+
+
+
+
+        return view ('predict', compact('predict'));
+    }
+
+//    public function culture_filter()//аналогично для типов техники
+//    {
+//
+//
+//        $elements = count(request('plant_culture_id'));
+//
+//        $i = 0;
+////        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+//
+//
+//        for ($i; $i<$elements; $i += 1)
+//        {
+//
+//
+//            $prod_plant = DB::select(('select * from products_plant_culture() where culture_id = ?'), [request('plant_culture_id')]);
+//
+//            $culture = DB::select('select * from plant__cultures');
+//
+//
+////            dd($culture)
+//
+//            return view('prod_plant_culture', compact('prod_plant', 'culture'));
+//
+//
+//
+//        };
+//
+////        dd($culture);
+//
+//
+//    }
+
+
+    public function culture_filter()//аналогично для типов техники
+    {
+
+
+        $elements = count(request('plant_culture_id'));
+
+
+
+        $i = 0;
+//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+
+
+        for ($i; $i<$elements; $i += 1)
+        {
+
+
+            $prod_plant = DB::select(('select * from products_plant_culture() where culture_id = ?'), [request('plant_culture_id')]);
+
+            $culture = DB::select('select * from plant__cultures');
+
+
+//            dd($culture)
+
+            return view('prod_plant_culture', compact('prod_plant', 'culture'));
+
+
+
+        };
+
+//        dd($culture);
+
+
     }
 
     /**
