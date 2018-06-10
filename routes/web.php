@@ -46,3 +46,5 @@ Route::get('/predict', 'Product_Plant_CulturesController@predindex');
 Route::post('/prod_plant_culture/culture_filter', 'Product_Plant_CulturesController@culture_filter');
 
 Route::post('/predict/result', 'Product_Plant_CulturesController@result');
+
+Route::get('/predict/result', 'Product_Plant_CulturesController@result');

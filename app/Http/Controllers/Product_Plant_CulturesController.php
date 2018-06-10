@@ -43,40 +43,37 @@ class Product_Plant_CulturesController extends Controller
     public function result()
     {
 
-        $elements = [(request('culture_id'))];
-
-        dd($elements);
+        $elements = (request('culture_id'));
 
         $quantity = (int)(request('quantity'));
 
-        $i = 0;
-//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+//        dd($quantity);
+
+//        $i = 0;
 
 
-        for ($i; $i<$elements; $i += 1)
-        {
+//        for ($i; $i<$elements; $i += 1)
+//        {
+
+//            $predict = DB::select(("select * from predict_land(?,?)"), $elements, $quantity);
 
 
-            $predict = DB::select(('select * from predict_land(?,?)'),[request('culture_id')],$quantity);
+//
+//            $cult = DB::select('select * from plant__cultures');
 
 
+////            dd($culture)
 
-            $culture = DB::select('select * from plant__cultures');
-
-
-//            dd($culture)
-
-            return view('prod_plant_culture', compact('prod_plant', 'culture'));
-
-
-
-        };
-
-
-        $culture = request('culture_name');
-
-
-
+        $predict = DB::select('select * from predict_land(' . $elements . ', ' . $quantity. ')');
+////
+//        dd($predict);
+//    }
+//            foreach($elements as $key => $arr){
+//
+//               
+////
+////
+//            }
 
         return view ('predict', compact('predict'));
     }

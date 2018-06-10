@@ -32,13 +32,24 @@ $s = new Staff();*/
 
 
     <form class="popup-form" method="post" action="/predict/result">
+        <div>
         {{ csrf_field() }}
-            <div class="popup-form-row">
-                <select name="culture_id" id="product-add">
-                    @foreach($cult as $pp)
-                        <option value="{{$pp->culture_name}}">{{$pp->culture_name}} </option>
-                    @endforeach
-                </select>
+            {{--<div class="popup-form-row">--}}
+                {{--<select name="culture_id" id="product-add">--}}
+                    {{--@foreach($cult as $pp)--}}
+                        {{--<option value="{{$pp->culture_name}}">{{$pp->culture_name}} </option>--}}
+                    {{--@endforeach--}}
+                {{--</select>--}}
+
+                <div class="popup-form-row">
+                    <label for="title">Имя</label>
+                    <input type="text" class="form-control" id="title" name="culture_id" placeholder="Введите дату">
+        <span class="required" title="Required field">
+                           Вводите дату в формате ГГ-ММ-ДД
+                    </span>
+
+
+                </div>
 
             <div class="popup-form-row">
                 <label for="title">Имя</label>
@@ -56,7 +67,7 @@ $s = new Staff();*/
                     </button>
                 </div>
             </div>
-    </form>
+
 
     <div class="container">
         <div class="dashboard-content">
@@ -64,37 +75,25 @@ $s = new Staff();*/
                 <h1>Активные сотрудники</h1>
 
                 <div class="table-heading-black">
-                    <div class="table-section-small">Culture ID</div>
-                    <div class="table-section-small">Culture </div>
+                    <div class="table-section-small">Culture</div>
+                    <div class="table-section-small">Amount of Planted Lands </div>
+                    <div class="table-section-small">Amount of Products </div>
                 </div>
                 <ul class="table-list">
-                    @foreach($cult as $r)
-                        {{--                            @if($s->user->activated)--}}
-                        <li class="table-list-item">
-                            <div class="table-section-small">{{ $r->plant_culture_id or '?' }}</div>
-                            <div class="table-section-small">{{ $r->culture_name or '?' }}</div>
-                            {{--@endif--}}
+                    @foreach($predict as $r)
 
-                            {{--<div class="table-section-small">--}}
-                            {{--<input type="checkbox" name="activated" value="true"--}}
-                            {{--                                               @if($s->user->activated) checked @endif disabled>--}}
-                            {{--</div>--}}
-                            {{--@if($role->isAdmin()) --}}{{-- ADMIN ONLY --}}
-                            {{--<button id="{{$s->id}}"--}}
-                            {{--class="table-section-small table-edit table-edit-staff"--}}
-                            {{--onclick="togglePopupEdit();">--}}
-                            {{--<i class="fas fa-edit"></i>--}}
-                            {{--</button>--}}
-                            {{--@endif--}}
+                        <li class="table-list-item">
+                            <div class="table-section-small">{{ $r->culture or '?' }}</div>
+                            <div class="table-section-small">{{ $r->amount_of_planted or '?' }}</div>
+                            <div class="table-section-small">{{ $r->amount_of_necessary_products or '?' }}</div>
+
                         </li>
-                        {{--@endif--}}
+
                     @endforeach
                 </ul>
-                {{--{!! $staff->render() !!}--}}
-                {{--@if($role->isAdmin())--}}
-                {{--@include('popup.popup-staff-edit')--}}
-                {{--@endif--}}
+
             </div>
+    </form>
 
             {{--<div class="flex-row space-between">--}}
             {{--<div class="flex-item-half">--}}
@@ -136,7 +135,9 @@ $s = new Staff();*/
             {{--</div>--}}
         </div>
     </div>
+
 </section>
+
 
 {{--<script>--}}
 {{--var x = $('div #2 .profile-activator');--}}
