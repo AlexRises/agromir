@@ -67,6 +67,17 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'pgsqlAuth' => [
+            'driver'   => 'pgsql',
+            'host'     => env('DB_HOST', 'localhost'),
+            'database' => env('DB_DATABASE_AUTH', 'forge'),
+            'username' => env('DB_USERNAME_AUTH', 'forge'),
+            'password' => env('DB_PASSWORD_AUTH', ''),
+            'charset'  => 'utf8',
+            'prefix'   => '',
+            'schema'   => 'public',
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST', 'localhost'),

@@ -1,2 +1,0 @@
-
-//# sourceMappingURL=workplace.js.map

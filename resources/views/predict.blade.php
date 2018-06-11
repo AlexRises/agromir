@@ -93,6 +93,8 @@ $s = new Staff();*/
                 </ul>
 
             </div>
+            </div>
+        </div>
     </form>
 
             {{--<div class="flex-row space-between">--}}
