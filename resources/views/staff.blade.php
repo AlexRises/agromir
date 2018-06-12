@@ -1,3 +1,9 @@
+<?php
+use App\Role;
+$role = new Role();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,10 +105,14 @@
                 <li class="nav-label">Home</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Profile <span class="label label-rouded label-primary pull-right">2</span></span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li></li>
+                        @if (Auth::check())
+                        <li>{{Auth::user()->email}}</li>
+                        @endif
                         <li><a href="/logout">Logout</a></li>
+
                     </ul>
                 </li>
+                @if(!$role->isAgr())
                 <li class="nav-label">Staff</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-envelope"></i><span class="hide-menu">Staff</span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -110,7 +120,9 @@
 
                     </ul>
                 </li>
+                @endif
 
+                @if($role->isCeo() or $role->isVice())
                 <li class="nav-label">Technic</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Technic <span class="label label-rouded label-warning pull-right">6</span></span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -118,22 +130,28 @@
 
                     </ul>
                 </li>
+                @endif
+                @if(!$role->isAgr())
                 <li class="nav-label">Orders</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Invoice <span class="label label-rouded label-danger pull-right">6</span></span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="/invoice">Invoices</a></li>
+                        @if(!$role->isAcc())
                         <li><a href="/new_invoice">Make new Invoice</a></li>
                         <li><a href="/invoice_add">Make new Ordrer</a></li>
-
+                        @endif
 
                     </ul>
                 </li>
+                @endif
+
                 <li class="nav-label">Products</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Products</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="/products">Products</a></li>
                     </ul>
                 </li>
+                @if($role->isCeo() or $role->isAgr())
                 <li class="nav-label">Plant Cultures</li>
                 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Plant Culture</span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -143,6 +161,7 @@
 
                     </ul>
                 </li>
+                    @endif
                     </ul>
                 </li>
             </ul>
@@ -181,19 +200,38 @@
             <h4 class="card-title">Data Table</h4>
             <h6 class="card-subtitle">Data table example</h6>
             <div class="table-responsive m-t-40">
+                @if($role->isCeo())
+                <a href="/staff_add"> <input type="submit" name="create_staff" class="btn btn-info" value="Create Staff" /></a>
+                @endif
 
+                <h4>Select Branch and Type</h4><br />
+
+                <div class="popup-form-row">
+                    <form method="post" action="/staff/staff_filter">
+                        {{csrf_field()}}
+                        <label>Position</label>
+                        <select name="position[]" id="product-add" required>
+                            @foreach($pos as $in)
+                                <option value="{{$in->position}}">{{$in->position}} </option>
+                            @endforeach
+                        </select>
+
+                        <p><input type="submit" name="submit_staff" class="btn btn-info" value="Submit Type" /></p>
+
+
+                    </form>
+                </div>
 
                 <div class="table-heading-black">
-                    <div class="table-section-small">#</div>
-                    <div class="table-section-big">Полное Имя</div>
-                    <div class="table-section">Телефон</div>
-                    {{--@if(!$role->isStaff()) --}}{{-- RESTRICTED FOR STAFF --}}
-                    <div class="table-section">Оклад</div>
+                    <div class="table-section-small">Имя</div>
+                    <div class="table-section-small">Фамилия</div>
+                    <div class="table-section-small">Позиция</div>
+                    @if($role->isCeo())
+                    <div class="table-section-small">Оклад</div>
+                    @endif
                     {{--@endif--}}
-                    <div class="table-section">Адрес</div>
-                    <div class="table-section">Должность</div>
+                    <div class="table-section-small" >Город</div>
                     <div class="table-section-small">
-                        <i class="fas fa-check"></i>
                     </div>
                     {{--@if($role->isAdmin()) --}}{{-- ADMIN ONLY --}}
                     {{--<div class="table-section-small">--}}
@@ -205,14 +243,16 @@
                     @foreach($staff as $s)
                         {{--                            @if($s->user->activated)--}}
                         <li class="table-list-item">
-                            <div class="table-section-small">{{ $s->name_ or '?' }}</div>
-                            <div class="table-section-big">{{ $s->surname_ or '?' }}</div>
+                            <div class="table-section">{{ $s->name_ or '?' }}</div>
+                            <div class="table-section">{{ $s->surname_ or '?' }}</div>
                             <div class="table-section">{{ $s->pos or '?' }}</div>
-                            {{--@if(!$role->isStaff()) --}}{{-- RESTRICTED FOR STAFF --}}
+                            @if($role->isCeo())
                             <div class="table-section">{{ $s->payment_ or '?' }}</div>
+                            @endif
                             {{--@endif--}}
                             <div class="table-section">{{ $s->city or '?' }}</div>
-
+                            <div class="table-section-small"> <a href="/staff_add"> <input type="submit" name="create_staff" class="btn btn-info" value="Update Staff" /></a></div>
+                            <div class="table-section-small"> <a href="/staff_add"> <input type="submit" name="create_staff" class="btn btn-info" value="Delete Staff" /></a></div>
                             {{--<div class="table-section-small">--}}
                             {{--<input type="checkbox" name="activated" value="true"--}}
                             {{--                                               @if($s->user->activated) checked @endif disabled>--}}

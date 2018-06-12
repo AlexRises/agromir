@@ -96,8 +96,8 @@ main {
     margin-top: 50px; }
 
 .table-section-small {
-  -ms-flex: 1 0 0;
-  flex: 1 0 0; }
+  -ms-flex: 0.5 0 0;
+  flex: 0.5 0 0; }
 
 .table-section {
   -ms-flex: 2 0 0;

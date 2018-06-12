@@ -29,7 +29,10 @@ class StaffController extends Controller
     public function index()
     {
         $staff = DB::select('select * from staff_state()');
-        return view('staff', compact('staff'));
+
+        $pos = DB::select('select distinct position from staff');
+
+        return view('staff', compact('staff', 'pos'));
     }
 
     /**
@@ -38,20 +41,49 @@ class StaffController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function staff_filter()//аналогично для типов техники
+    public function staff_filter(Request $request)//аналогично для типов техники
     {
 
 
-        $type = request('staff');
+        $elements = count($request->position);
 
 
 
-        $staff = DB::select(('select * from staff_state() where pos = ?'), $type);
+
+        $i = 0;
+//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+
+
+        for ($i; $i<$elements; $i += 1)
+        {
+
+//            $pos = $request->position[ $i ];
 
 
 
-        return view('staff', compact('staff'));
+            $staff = DB::select(('select * from staff_state() where pos = ?'), [$request->position[ $i ]]);
 
+            $pos = DB::select('select distinct position from staff');
+
+           return view('staff', compact('staff', 'pos'));
+
+
+
+        };
+
+
+
+
+    }
+    
+    public function staff_add()
+    {
+        $branch = DB::select('select * from branches');
+
+        $position = DB::select('select distinct position from staff');
+        
+
+        return view('/staff_add', compact('branch', 'position'));
     }
     public function create()
     {
@@ -66,7 +98,27 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $elements = count($request->position);
+        $i = 0;
+//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+
+
+        for ($i; $i<$elements; $i += 1)
+        {
+            Staff::create([
+                'name'=>$request->name,
+                'patronym'=>$request->patronym,
+                'surname'=>$request->surname,
+                'phone'=>$request->phone,
+                'position'=>$request->position[ $i ],
+                'payment'=>request('payment'),
+                'branch'=>$request->branch[ $i ],
+                'address'=>$request->address
+            ]);
+
+        };
+
+        return redirect ('/staff');
     }
 
     /**
