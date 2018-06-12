@@ -1,6 +1,8 @@
 <?php
 /*use App\Staff;
 $s = new Staff();*/
+
+$predict = [];
 ?>
 
 {{--@extends('layouts.dashboard')--}}

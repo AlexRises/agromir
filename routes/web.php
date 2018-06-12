@@ -49,4 +49,18 @@ Route::post('/predict/result', 'Product_Plant_CulturesController@result');
 
 Route::get('/predict/result', 'Product_Plant_CulturesController@result');
 
-Route::get('/registration', 'RegistrationController@index');
+Route::get('/register', 'RegistrationController@index');
+
+
+
+Route::post('/register', 'RegistrationController@store');
+//Auth::routes();
+
+Route::get('/login', 'LoginController@index');
+
+Route::post('/login', 'LoginController@store');
+
+Route::get('/logout', 'LoginController@destroy');
+
+
+//Route::get('/home', 'HomeController@index')->name('home');

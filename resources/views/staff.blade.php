@@ -21,6 +21,11 @@ $s = new Staff();*/
 <section id="staff">
 
     <h3 align="center">Get Multiple Types And Branches</h3><br />
+
+    @if(Auth::check())
+
+    <h3 align="center">{{ Auth::user()->email}}</h3><br />
+    @endif
     <h4>Select Branch and Type</h4><br />
 
     <div class="popup-form-row">

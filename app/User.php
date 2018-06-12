@@ -19,9 +19,11 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array
+     *
+     *
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 'password', 'role_id',
     ];
 
     /**
@@ -32,4 +34,32 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public $timestamps = false;
+
+    public function staff()
+    {
+        return $this->hasOne(Staff::class, 'staff_id');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function getRememberToken()
+    {
+        return $this->token;
+    }
+
+    public function setRememberToken($value)
+    {
+        $this->token = $value;
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'token';
+    }
+
 }
