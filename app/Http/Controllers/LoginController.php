@@ -87,11 +87,10 @@ class LoginController extends Controller
 //
         if($user)
         {
-            config(['database.connections.pgsql.username' => $user[0]->name]);
+            config([    'database.connections.pgsql.username' => $user[0]->name]);
             switch ($user[0]->name)
             {
                 case 'chief_director':
-
                     config(['database.connections.pgsql.password' => env('DB_ROLE_CHIEF_DIRECTOR_PASSWORD')]);
                     break;
                 case 'vice_director':

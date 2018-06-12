@@ -15,6 +15,17 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        if ($this->middleware('auth'))
+        {
+            return redirect('/login');
+        }
+
+
+    }
+
     public function index()
     {
         $staff = DB::select('select * from staff_state()');

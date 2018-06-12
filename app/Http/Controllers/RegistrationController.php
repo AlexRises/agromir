@@ -22,7 +22,10 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        return view('auth.register');
+        $position = DB::select('select *
+            from roles');
+        return view('auth.register', compact('position'));
+
     }
 
     /**
@@ -50,28 +53,37 @@ class RegistrationController extends Controller
 
         $email = request('email');
         $passwordHash = hash('sha512', request('password'));
-        
-     
 
-       User::create([
-            'email' => $email,
-            'password' => $passwordHash,
-            'role_id' => 3
-        ]);
+        $elements = count($request->position);
 
-      
-
-        //Running as host
-        config(['database.connections.pgsqlAuth.username' => env('DB_USERNAME')]);
-        config(['database.connections.pgsqlAuth.password' => env('DB_PASSWORD')]);
+        $i = 0;
+//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
 
 
-        DB::connection('pgsqlAuth')
-            ->select("INSERT INTO users(email, password, role_id)
+        for ($i; $i<$elements; $i += 1)
+        {
+            User::create([
+                'email' => $email,
+                'password' => $passwordHash,
+                'role_id' => $request->position[ $i ]
+            ]);
+
+            $pos = $request->position[ $i ];
+//Running as host
+            config(['database.connections.pgsqlAuth.username' => env('DB_USERNAME')]);
+            config(['database.connections.pgsqlAuth.password' => env('DB_PASSWORD')]);
+
+
+            $use = DB::connection('pgsqlAuth')
+                ->select("INSERT INTO users(email, password, role_id)
 			VALUES 
-			('$email','$passwordHash',3)");
+			('$email','$passwordHash', '$pos')");
+
+
+        };
+
         
-        return redirect('/home');
+        return redirect('/login');
     }
 
     /**

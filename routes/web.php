@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/staff', 'StaffController@index');
 
+Route::get('/login', 'StaffController@__construct');
+
 Route::get('/technic', 'TechnicController@index');
 
 Route::post('/technic/branch_filter', 'TechnicController@branch_filter');
