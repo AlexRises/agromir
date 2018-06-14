@@ -37,11 +37,6 @@ class User extends Authenticatable
 
     public $timestamps = false;
 
-    public function staff()
-    {
-        return $this->hasOne(Staff::class, 'staff_id');
-    }
-
     public function role()
     {
         return $this->belongsTo(Role::class);

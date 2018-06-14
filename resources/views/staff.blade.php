@@ -56,18 +56,7 @@ $role = new Role();
             </div>
             <!-- End Logo -->
             <div class="navbar-collapse">
-                <!-- toggle and nav items -->
-                <ul class="navbar-nav mr-auto mt-md-0">
-                    <!-- This is  -->
-                    <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                    <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                    <!-- Messages -->
 
-
-
-                    <!-- End Messages -->
-                </ul>
-                <!-- User profile and search -->
 
             </div>
             <!-- End Comment -->
@@ -75,20 +64,7 @@ $role = new Role();
 
             <!-- End Messages -->
             <!-- Profile -->
-            <ul class="navbar-nav my-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/images/users/5.jpg" alt="user" class="profile-pic" /></a>
-                <div class="dropdown-menu dropdown-menu-right animated zoomIn">
-                    <ul class="dropdown-user">
-                        <li><a href="#"><i class="ti-user"></i> Profile</a></li>
-                        <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
-                        <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                        <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
-                        <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-                    </ul>
-                </div>
-            </li>
-            </ul>
+
         </nav>
     </div>
 
@@ -163,8 +139,7 @@ $role = new Role();
                 </li>
                     @endif
                     </ul>
-                </li>
-            </ul>
+
         </nav>
         <!-- End Sidebar navigation -->
     </div>
@@ -176,11 +151,11 @@ $role = new Role();
     <!-- Bread crumb -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-primary">Dashboard</h3> </div>
+            <h3 class="text-primary">Staff</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active">Staff</li>
             </ol>
         </div>
     </div>
@@ -197,27 +172,33 @@ $role = new Role();
     -->
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Data Table</h4>
-            <h6 class="card-subtitle">Data table example</h6>
-            <div class="table-responsive m-t-40">
-                @if($role->isCeo())
-                <a href="/staff_add"> <input type="submit" name="create_staff" class="btn btn-info" value="Create Staff" /></a>
-                @endif
 
-                <h4>Select Branch and Type</h4><br />
+            <div class="table-responsive m-t-40">
+
+                @if($role->isCeo())
+
+                    <a href = "/staff_add"><button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Create Staff</button></a>
+
+                @endif
+                    @if($role->isCeo())
+                        <a href = "/staff"><button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Back to All</button></a>
+
+
+                <h4 class="card-title">Select Branch and Type</h4><br />
 
                 <div class="popup-form-row">
                     <form method="post" action="/staff/staff_filter">
                         {{csrf_field()}}
                         <label>Position</label>
-                        <select name="position[]" id="product-add" required>
+                        <select name="position" id="product-add" required>
                             @foreach($pos as $in)
                                 <option value="{{$in->position}}">{{$in->position}} </option>
                             @endforeach
                         </select>
 
-                        <p><input type="submit" name="submit_staff" class="btn btn-info" value="Submit Type" /></p>
-
+                        {{--<p><input type="submit" name="submit_staff" class="btn btn-info" value="Submit Type" /></p>--}}
+                        <button type="submit" name="submin_staff" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit Staff</button>
+                        @endif
 
                     </form>
                 </div>
@@ -233,11 +214,7 @@ $role = new Role();
                     <div class="table-section-small" >Город</div>
                     <div class="table-section-small">
                     </div>
-                    {{--@if($role->isAdmin()) --}}{{-- ADMIN ONLY --}}
-                    {{--<div class="table-section-small">--}}
-                    {{--<i class="fas fa-edit"></i>--}}
-                    {{--</div>--}}
-                    {{--@endif--}}
+                    {
                 </div>
                 <ul class="table-list">
                     @foreach($staff as $s)
@@ -251,27 +228,19 @@ $role = new Role();
                             @endif
                             {{--@endif--}}
                             <div class="table-section">{{ $s->city or '?' }}</div>
-                            <div class="table-section-small"> <a href="/staff_add"> <input type="submit" name="create_staff" class="btn btn-info" value="Update Staff" /></a></div>
-                            <div class="table-section-small"> <a href="/staff_add"> <input type="submit" name="create_staff" class="btn btn-info" value="Delete Staff" /></a></div>
-                            {{--<div class="table-section-small">--}}
-                            {{--<input type="checkbox" name="activated" value="true"--}}
-                            {{--                                               @if($s->user->activated) checked @endif disabled>--}}
-                            {{--</div>--}}
-                            {{--@if($role->isAdmin()) --}}{{-- ADMIN ONLY --}}
-                            {{--<button id="{{$s->id}}"--}}
-                            {{--class="table-section-small table-edit table-edit-staff"--}}
-                            {{--onclick="togglePopupEdit();">--}}
-                            {{--<i class="fas fa-edit"></i>--}}
-                            {{--</button>--}}
-                            {{--@endif--}}
+
+                            @if($role->isCeo())
+                                <div class="table-section-small"> <a href="{{route('showStaffProfile', ['staff_id'=>$s->id]) }}"><input type="submit" name="staff_id" class="btn btn-info" value="Update Staff" /></a></div>
+
+
+
+                            @endif
+
                         </li>
-                        {{--@endif--}}
+
                     @endforeach
                 </ul>
-                {{--{!! $staff->render() !!}--}}
-                {{--@if($role->isAdmin())--}}
-                {{--@include('popup.popup-staff-edit')--}}
-                {{--@endif--}}
+
             </div>
             </div>
         </div>

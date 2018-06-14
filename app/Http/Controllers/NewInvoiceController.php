@@ -13,6 +13,17 @@ class NewInvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        if ($this->middleware('auth'))
+        {
+            return redirect('/login');
+        }
+
+
+    }
+    
     public function index()
     {
         $provlist = DB::select('select * from providers()');

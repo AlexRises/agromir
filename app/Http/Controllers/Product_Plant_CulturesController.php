@@ -14,6 +14,18 @@ class Product_Plant_CulturesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        if ($this->middleware('auth'))
+        {
+            return redirect('/login');
+        }
+
+
+    }
+    
+    
     public function index()
     {
         
@@ -128,6 +140,8 @@ class Product_Plant_CulturesController extends Controller
 
 
             $prod_plant = DB::select(('select * from products_plant_culture() where culture_id = ?'), [request('plant_culture_id')]);
+
+           
 
             $culture = DB::select('select * from plant__cultures');
 

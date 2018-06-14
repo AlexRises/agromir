@@ -14,6 +14,17 @@ class TechnicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        if ($this->middleware('auth'))
+        {
+            return redirect('/login');
+        }
+
+
+    }
+    
     public function index()
     {
         $technic = DB::select('select * from technic_state()'); //Запрос в процедуру

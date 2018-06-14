@@ -15,6 +15,17 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        if ($this->middleware('auth'))
+        {
+            return redirect('/login');
+        }
+
+
+    }
+    
     public function index()
     {
         $outcome = DB::select('select * from products_outcome()'); //Запрос в процедуру

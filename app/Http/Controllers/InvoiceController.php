@@ -16,7 +16,19 @@ class InvoiceController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
+     * 
      */
+
+    public function __construct()
+    {
+        if ($this->middleware('auth'))
+        {
+            return redirect('/login');
+        }
+
+
+    }
     public function index()
     {
         $invoice = DB::select('select * from invoice_advanced()');
@@ -70,6 +82,10 @@ class InvoiceController extends Controller
         $elements = count($request->provider_id);
         $i = 0;
 
+        $this->validate( request(),[
+            'date_of_delivery'=>'required|min:10|max:10'
+
+        ]);
         for ($i; $i<$elements; $i += 1)
         {
             Invoice::create([

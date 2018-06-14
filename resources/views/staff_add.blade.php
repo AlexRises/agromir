@@ -126,7 +126,6 @@
         </div>
     </div>
 
-</div>
 <!-- End Wrapper -->
 <!-- All Jquery -->
 <script src="js2/lib/jquery/jquery.min.js"></script>

@@ -22,6 +22,17 @@ Route::get('/staff_add', 'StaffController@staff_add');
 Route::post('/staff', 'StaffController@store');
 
 Route::post('/staff/staff_filter', 'StaffController@staff_filter');
+//Route::post('/staff_update/{id}', 'StaffController@update');
+
+Route::get('/staff_update/{id}', 'StaffController@show')->name('showStaffProfile');
+
+Route::post('/staff/{id}', 'StaffController@destroy')->name('deleteStaffProfile');
+
+Route::post('/staff_update', 'StaffController@update')->name('storeUpdateStaff');
+
+//Route::get('/staff_update', 'StaffController@show');
+
+
 
 Route::get('/login', 'StaffController@__construct');
 
