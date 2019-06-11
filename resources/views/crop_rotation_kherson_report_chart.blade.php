@@ -31,6 +31,16 @@ $role = new Role();
     <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script src="http://www.chartjs.org/dist/2.7.3/Chart.bundle.js"></script>
+    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -176,16 +186,46 @@ $role = new Role();
         <div class="card-body">
 
             <div class="table-responsive m-t-40">
+                <div id="container" style="width: 50%;">
+                    <canvas id="canvas"></canvas>
+                </div>
+                <script>
+                    var chartdata = {
+                        type: 'bar',
+                        data: {
+                            labels: <?php echo json_encode($Months); ?>,
+                            // labels: month,
+                            datasets: [
+                                {
+                                    label: 'Rapseed Harvest, tons',
+                                    backgroundColor: '#26B99A',
+                                    borderWidth: 1,
+                                    data: <?php echo json_encode($Data); ?>
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    }
+                    var ctx = document.getElementById('canvas').getContext('2d');
+                    new Chart(ctx, chartdata);
+                </script>
+{{--                    <h4 class="card-title">Select Field</h4><br />--}}
 
-                    <h4 class="card-title">Select Field</h4><br />
+{{--                <form action="/crop_rotation_kherson_report">--}}
 
-                <form action="/crop_rotation_kherson_report">
-
-                    <button class="btn btn-primary btn-flat m-b-30 m-t-30" onclick="" >
-                        <i class="fas fa-plus"></i>
-                        <span></span>
-                    </button>
-                </form>
+{{--                    <button class="btn btn-primary btn-flat m-b-30 m-t-30" onclick="" >--}}
+{{--                        <i class="fas fa-plus"></i>--}}
+{{--                        <span></span>--}}
+{{--                    </button>--}}
+{{--                </form>--}}
 
 {{--                    <div class="popup-form-row">--}}
 {{--                        <form method="post" action="/staff/staff_filter">--}}
@@ -212,36 +252,36 @@ $role = new Role();
 {{--                        </form>--}}
 {{--                    </div>--}}
 
-                    <div class="table-heading-black">
-                        <div class="table-section-small">Номер поля</div>
-                        <div class="table-section-small">Культура</div>
-                        <div class="table-section-small">Сорт</div>
-                            <div class="table-section-small">Урожайность(т/га)</div>
-                        <div class="table-section-small" >Общая урожайность</div>
-                        <div class="table-section-small" >Количество гектар</div>
-                        <div class="table-section-small" >Сезон</div>
+{{--                    <div class="table-heading-black">--}}
+{{--                        <div class="table-section-small">Номер поля</div>--}}
+{{--                        <div class="table-section-small">Культура</div>--}}
+{{--                        <div class="table-section-small">Сорт</div>--}}
+{{--                            <div class="table-section-small">Урожайность(т/га)</div>--}}
+{{--                        <div class="table-section-small" >Общая урожайность</div>--}}
+{{--                        <div class="table-section-small" >Количество гектар</div>--}}
+{{--                        <div class="table-section-small" >Сезон</div>--}}
 
-                        </div>
+{{--                        </div>--}}
 
-                    </div>
-                    <ul class="table-list">
-                        @foreach($report as $s)
-                            {{--                            @if($s->user->activated)--}}
-                            <li class="table-list-item">
-                                <div class="table-section">{{ $s->field_number or '?' }}</div>
-                                <div class="table-section">{{ $s->culture or '?' }}</div>
-                                <div class="table-section">{{ $s->class or '?' }}</div>
-                                <div class="table-section">{{ $s->harvest_per_ha or '?' }}</div>
-                                <div class="table-section">{{ $s->total_harvest or '?' }}</div>
-                                <div class="table-section">{{ $s->ha or '?' }}</div>
-                                <div class="table-section">{{ $s->season or '?' }}</div>
+{{--                    </div>--}}
+{{--                    <ul class="table-list">--}}
+{{--                        @foreach($report as $s)--}}
+{{--                            --}}{{--                            @if($s->user->activated)--}}
+{{--                            <li class="table-list-item">--}}
+{{--                                <div class="table-section">{{ $s->field_number or '?' }}</div>--}}
+{{--                                <div class="table-section">{{ $s->culture or '?' }}</div>--}}
+{{--                                <div class="table-section">{{ $s->class or '?' }}</div>--}}
+{{--                                <div class="table-section">{{ $s->harvest_per_ha or '?' }}</div>--}}
+{{--                                <div class="table-section">{{ $s->total_harvest or '?' }}</div>--}}
+{{--                                <div class="table-section">{{ $s->ha or '?' }}</div>--}}
+{{--                                <div class="table-section">{{ $s->season or '?' }}</div>--}}
 
-                            </li>
+{{--                            </li>--}}
 
-                        @endforeach
-                    </ul>
+{{--                        @endforeach--}}
+{{--                    </ul>--}}
 
-            </div>
+{{--            </div>--}}
         </div>
     </div>
 </div>
@@ -278,3 +318,9 @@ $role = new Role();
 </body>
 
 </html>
+<script>
+    import ChartLineComponent from "../assets/js/components/ChartLineComponent";
+    export default {
+        components: {ChartLineComponent}
+    }
+</script>

@@ -179,7 +179,13 @@ $role = new Role();
 
                     <h4 class="card-title">Select Culture</h4><br />
                 <form action="/crop_rotation_kherson_report_chart">
-
+                    {{csrf_field()}}
+                    <label>Season</label>
+                    <select name="season_id[]" id="product-add" required>
+                        @foreach($season as $in)
+                            <option value="{{$in->season}}">{{$in->season}} </option>
+                        @endforeach
+                    </select>
                     <button class="btn btn-primary btn-flat m-b-30 m-t-30" onclick="" >
                         <i class="fas fa-plus"></i>
                         <span>Watch Chart</span>

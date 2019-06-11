@@ -78,6 +78,57 @@ class Crop_RotationController extends Controller
 
     }
 
+//    public function chartData()
+//    {
+//        $data =  [
+//            'labels' =>['march', 'april', 'may', 'june'],
+//            'datasets' => array([
+//                'label' => 'Sales',
+//                'backgroundColor' => '#F26202',
+//                'data' => [15000,5000,10000,30000],
+//
+//            ])
+//        ];
+//
+//        return view('crop_rotation_kherson_report_chart', compact('$data'));
+//
+////        $kherson = DB::select('select * from crop_rot_info_kherson()');
+////
+////        $season = DB::select('select distinct season from crop_rotation');
+////
+////        return view('crop_rotation_kherson_report_chart', compact('kherson', 'season'));
+//    }
+
+    public function Chartjs(){
+
+        $elements = count(request('season_id'));
+        $i = 0;
+
+
+
+        for ($i; $i<$elements; $i += 1)
+        {
+
+            $report = DB::select(('select * from crop_rot_info_kherson() where season = ?'), request('season_id'));
+           $at = collect($report);
+            $ex = $at->pluck('total_harvest');
+            $field_num = $at->pluck('field_number');
+
+            $season = DB::select('select distinct season from crop_rotation');
+
+            $culture = DB::select('select distinct culture_name from crop_rotation');
+
+//            $month = array('Jan', 'Feb', 'Mar', 'Apr', 'May');
+
+
+            return view('crop_rotation_kherson_report_chart',['Months' => $field_num, 'Data' => $ex]);
+
+        };
+
+
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

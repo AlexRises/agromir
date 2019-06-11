@@ -83,11 +83,17 @@ Route::get('/logout', 'LoginController@destroy');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/crop_rotation_kherson', 'Crop_RotationController@index');
 
 Route::post('/crop_rotation_kherson/crop_rotation_kherson_report', 'Crop_RotationController@crop_rotation_filter');
 
 Route::get('/crop_rotation_kherson_report', 'Crop_RotationController@crop_rotation_filter');
+
 Route::post('/crop_rotation_kherson_report/crop_rotation_kherson_report_by_culture', 'Crop_RotationController@crop_rotation_filter_by_culture');
 
 Route::get('/crop_rotation_kherson_report_by_culture', 'Crop_RotationController@crop_rotation_filter_by_culture');
+
+Route::get('/crop_rotation_kherson_report_chart', 'Crop_RotationController@Chartjs');
+
+Route::post('/crop_rotation_kherson_report/crop_rotation_kherson_report_chart', 'Crop_RotationController@Chartjs');
