@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     public $timestamps = false;
-    protected $table = 'branches';
+    protected $table = 'branch';
     protected $primaryKey = 'branch_id';
 
     protected $guarded = ['branch_id', 'city'];

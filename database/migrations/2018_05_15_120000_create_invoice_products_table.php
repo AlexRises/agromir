@@ -16,10 +16,11 @@ class CreateInvoiceProductsTable extends Migration
         Schema::create('invoice_products', function (Blueprint $table) {
             $table->increments('invoice_products_id');
             $table->integer('product');
-            $table->decimal('price');
+            //$table->decimal('price');
             $table->integer('amount');
             $table->integer('invoice');
             $table->string('unit');
+            $table->integer('branch');
             $table->foreign('product')
                 ->references('product_id')
                 ->on('product')
@@ -27,6 +28,10 @@ class CreateInvoiceProductsTable extends Migration
             $table->foreign('invoice')
                 ->references('invoice_id')
                 ->on('invoice')
+                ->onDelete('cascade');
+            $table->foreign('branch')
+                ->references('branch_id')
+                ->on('branch')
                 ->onDelete('cascade');
         });
 

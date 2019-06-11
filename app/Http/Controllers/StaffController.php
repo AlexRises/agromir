@@ -34,7 +34,9 @@ class StaffController extends Controller
 
         $pos = DB::select('select distinct position from staff');
 
-        return view('staff', compact('staff', 'pos'));
+        $cit = DB::select('select distinct city from branch');
+
+        return view('staff', compact('staff', 'pos', 'cit'));
     }
 
     /**
@@ -45,34 +47,51 @@ class StaffController extends Controller
 
     public function staff_filter()//аналогично для типов техники
         {
-            $elements = count(request('position'));
+            $elements = count(request('position_id'));
 
-            
+//            $city_elements = count(request('city_id'));
+
             $i = 0;
+//            $j = 0;
     //        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
 
             for ($i; $i<$elements; $i += 1)
             {
 
+
+                    $staff = DB::select(('select * from staff_state() where pos = ?'), request('position_id'));
+//                    $el = request('position_id');
+////                    dd($el);
+//                    $mystring = implode(',', array_column($el, 0));
+//                    dd($mystring);
+//
+//
+//                    $staff = DB::select('select * from staff_state()')->where($el_string, function ($query, $el_string) {
+//                        $query->where('pos', $el_string);
+//                    })->get();
+//
+//                    dd($staff);
+
+
+
+                    $pos = DB::select('select distinct position from staff');
+
+
+
+                    return view('staff', compact('staff', 'pos'));
+
+                };
+
     //            $pos = $request->position[ $i ];
 
-                $staff = DB::select(('select * from staff_state() where pos = ?'), [request('position')]);
 
 
-
-                $pos = DB::select('select distinct position from staff');
-
-
-
-               return view('staff', compact('staff', 'pos'));
-
-            };
 
         }
 
     public function staff_add()
     {
-        $branch = DB::select('select * from branches');
+        $branch = DB::select('select * from branch');
 
         $position = DB::select('select distinct position from staff');
 
@@ -82,7 +101,7 @@ class StaffController extends Controller
 
     public function staff_update()
     {
-        $branch = DB::select('select * from branches');
+        $branch = DB::select('select * from branch');
 
         $position = DB::select('select distinct position from staff');
 
@@ -135,7 +154,7 @@ class StaffController extends Controller
 
     {
 
-        $branch = DB::select('select * from branches');
+        $branch = DB::select('select * from branch');
 
         $position = DB::select('select distinct position from staff');
 

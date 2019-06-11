@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Technic_Type extends Model
 {
-    protected $table = 'technic__types';
+    protected $table = 'technic_type';
     public $timestamps = false;
     protected $primaryKey = 'technic_type_id';
 

@@ -188,14 +188,14 @@ $role = new Role();
                         Поставщик:
                     </span>
     </label>
-<select name="provider_id" id="product-add" required>
+<select name="provider_id[]" id="product-add" required>
     @foreach($provlist as $prov)
         <option value="{{$prov->id}}">{{ $prov->company }} </option>
     @endforeach
 </select>
     </div>
     <div class="popup-form-button">
-        <button class="btn btn-primary btn-flat m-b-30 m-t-30"" onclick="" >
+        <button class="btn btn-primary btn-flat m-b-30 m-t-30" onclick="" >
             <i class="fas fa-plus"></i>
             <span>Добавить новый инвойс</span>
         </button>

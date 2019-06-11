@@ -19,6 +19,17 @@ class CreateTechnicTable extends Migration
             $table->string('condition')->nullable();
             $table->date('date_of_delivery')->nullable();
             $table->integer('provider');
+            $table->integer('GPS_status_num')->nullable();
+            $table->string('GPS_status_text')->nullable();
+            $table->integer('DUT_status_num')->nullable();
+            $table->string('DUT_status_text')->nullable();
+            $table->integer('DRT_status_num')->nullable();
+            $table->string('DRT_status_text')->nullable();
+            $table->integer('branch');
+            $table->foreign('branch')
+                ->references('branch_id')
+                ->on('branch')
+                ->onDelete('cascade');
             $table->foreign('type_id')
                   ->references('technic_type_id')
                   ->on('technic_type')
@@ -27,6 +38,7 @@ class CreateTechnicTable extends Migration
                   ->references('provider_id')
                   ->on('provider')
                   ->onDelete('cascade');
+
         });
     }
 

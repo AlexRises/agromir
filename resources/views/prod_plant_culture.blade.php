@@ -182,7 +182,7 @@ $predict = [];
     <form method="post" action="/prod_plant_culture/culture_filter">
         {{ csrf_field() }}
     <div class="popup-form-row">
-    <select name="plant_culture_id" id="product-add">
+    <select name="plant_culture_id[]" id="product-add">
         @foreach($culture as $pp)
             <option value="{{$pp->plant_culture_id}}">{{$pp->culture_name}} </option>
         @endforeach

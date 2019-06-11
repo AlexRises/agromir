@@ -39,9 +39,9 @@ class InvoiceProductsController extends Controller
 
         $invoice_info = DB::select('select * from invoice_provider()');
 
-        $inv_prod = DB::select('select * from invoice__products');
+        $inv_prod = DB::select('select * from invoice_products');
         
-        $branch = DB::select('select * from branches');
+        $branch = DB::select('select * from branch');
         
         return view('invoice_add', compact('products_prices', 'plist', 'provlist','invoice_info', 'inv_prod', 'branch'));
     }
@@ -65,8 +65,9 @@ class InvoiceProductsController extends Controller
     public function store(Request $request)
     {
         $elements = count($request->product_id);
+
         $i = 0;
-//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
+
 
 
         for ($i; $i<$elements; $i += 1)
@@ -83,7 +84,7 @@ class InvoiceProductsController extends Controller
         };
 
         return redirect ('/invoice');
-
+//        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
 
 //        $elements = count($request->product_id);
 //        $i = 0;

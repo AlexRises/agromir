@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $table = 'products';
+    protected $table = 'product';
     protected $primaryKey = 'product_id';
 
     protected $guarded = ['*'];
@@ -18,7 +18,7 @@ class Product extends Model
 
     public function plantculture()
     {
-        return $this->belongsToMany(Plant_Culture::class, 'product__plant__cultures', 'product_id', 'plant_culture_id');
+        return $this->belongsToMany(Plant_Culture::class, 'product_plant_culture', 'product_id', 'plant_culture_id');
     }
     
 }

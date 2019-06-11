@@ -18,6 +18,7 @@ class CreateProductTable extends Migration
             $table->string('name')->nullable();
             $table->string('status')->nullable();
             $table->string('type')->nullable();
+
         });
     }
 

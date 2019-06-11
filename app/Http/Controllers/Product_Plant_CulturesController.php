@@ -32,9 +32,9 @@ class Product_Plant_CulturesController extends Controller
     
         $prod_plant = DB::select('select * from products_plant_culture()');
         
-        $culture = DB::select('select * from plant__cultures');
+        $culture = DB::select('select * from plant_culture');
 
-        $branch = DB::select('select * from branches');
+        $branch = DB::select('select * from branch');
 
         return view('prod_plant_culture', compact('prod_plant', 'culture', 'branch'));
     
@@ -43,7 +43,7 @@ class Product_Plant_CulturesController extends Controller
     public function predindex()
 
     {
-        $cult = DB::select('select * from plant__cultures');
+        $cult = DB::select('select * from plant_culture');
 
         $prod_plant = DB::select('select * from products_plant_culture()');
 
@@ -131,6 +131,7 @@ class Product_Plant_CulturesController extends Controller
 
 
 
+
         $i = 0;
 //        $product_price = Invoice_Product::where('product', '=',$request->product_id[ $i ] )->first()->price;
 
@@ -139,11 +140,10 @@ class Product_Plant_CulturesController extends Controller
         {
 
 
-            $prod_plant = DB::select(('select * from products_plant_culture() where culture_id = ?'), [request('plant_culture_id')]);
+            $prod_plant = DB::select(('select * from products_plant_culture() where culture_id = ?'), request('plant_culture_id'));
 
-           
 
-            $culture = DB::select('select * from plant__cultures');
+            $culture = DB::select('select * from plant_culture');
 
 
 //            dd($culture)
