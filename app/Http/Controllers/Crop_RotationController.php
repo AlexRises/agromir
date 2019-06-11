@@ -28,7 +28,54 @@ class Crop_RotationController extends Controller
     {
         $kherson = DB::select('select * from crop_rot_info_kherson()');
 
-        return view('crop_rotation_kherson', compact('kherson'));
+        $season = DB::select('select distinct season from crop_rotation');
+
+        return view('crop_rotation_kherson', compact('kherson', 'season'));
+    }
+
+    public function crop_rotation_filter()//аналогично для типов техники
+    {
+        $elements = count(request('season_id'));
+
+
+        $i = 0;
+//
+
+        for ($i; $i<$elements; $i += 1)
+        {
+
+            $report = DB::select(('select * from crop_rot_info_kherson() where season = ?'), request('season_id'));
+
+            $season = DB::select('select distinct season from crop_rotation');
+
+            $culture = DB::select('select distinct culture_name from crop_rotation');
+
+
+            return view('crop_rotation_kherson_report', compact('report', 'season', 'culture'));
+
+        };
+
+
+    }
+
+    public function crop_rotation_filter_by_culture()//аналогично для типов техники
+    {
+        $elements = count(request('culture_id'));
+
+
+        $i = 0;
+//
+
+        for ($i; $i < $elements; $i += 1) {
+
+            $report = DB::select(('select * from crop_rot_info_kherson() where culture = ?'), request('culture_id'));
+
+            $culture = DB::select('select distinct culture_name from crop_rotation');
+
+            return view('crop_rotation_kherson_report_by_culture', compact('report', 'culture'));
+
+        };
+
     }
 
     /**

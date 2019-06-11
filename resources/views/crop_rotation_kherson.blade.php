@@ -177,22 +177,19 @@ $role = new Role();
 
             <div class="table-responsive m-t-40">
 
-                    <h4 class="card-title">Select Field</h4><br />
-
+                    <h4 class="card-title">Select Season</h4><br />
+                <div class="popup-form-row">
                 <form action="/crop_rotation_kherson_report">
-
-                    <button class="btn btn-primary btn-flat m-b-30 m-t-30" onclick="" >
-                        <i class="fas fa?/staff_filter">
                             {{csrf_field()}}
-                            <label>Position</label>
-                            <select name="position_id[]" id="product-add" required>
-                                @foreach($pos as $in)
-                                    <option value="{{$in->position}}">{{$in->position}} </option>
+                            <label>Season</label>
+                            <select name="season_id[]" id="product-add" required>
+                                @foreach($season as $in)
+                                    <option value="{{$in->season}}">{{$in->season}} </option>
                                 @endforeach
+                            </select>
+{{--                            <p><input type="submit" name="make_crop_report" class="btn btn-info" value="Make Report" /></p>--}}
+                            <button type="submit" name="make_crop_report" class="btn btn-primary btn-flat m-b-30 m-t-30">Make Report</button>
 
-                            <p><input type="submit" name="submit_staff" class="btn btn-info" value="Submit Type" /></p>
-                            <button type="submit" name="submin_staff" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit Staff</button>
-                            @endif
 
                         </form>
                     </div>

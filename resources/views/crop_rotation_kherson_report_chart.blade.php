@@ -177,31 +177,40 @@ $role = new Role();
 
             <div class="table-responsive m-t-40">
 
-                    <h4 class="card-title">Select Culture</h4><br />
-                <form action="/crop_rotation_kherson_report_chart">
+                    <h4 class="card-title">Select Field</h4><br />
+
+                <form action="/crop_rotation_kherson_report">
 
                     <button class="btn btn-primary btn-flat m-b-30 m-t-30" onclick="" >
                         <i class="fas fa-plus"></i>
-                        <span>Watch Chart</span>
+                        <span></span>
                     </button>
                 </form>
-                <div class="popup-form-row">
-                    <form action="/crop_rotation_kherson_report_by_culture">
-                        {{csrf_field()}}
-                        <label>Culture</label>
-                        <select name="culture_id[]" id="product-add" required>
-                            @foreach($culture as $in)
-                                <option value="{{$in->culture_name}}">{{$in->culture_name}} </option>
-                            @endforeach
-                        </select>
-                        {{--                            <p><input type="submit" name="make_crop_report" class="btn btn-info" value="Make Report" /></p>--}}
-                        <button type="submit" name="make_crop_report" class="btn btn-primary btn-flat m-b-30 m-t-30">Make Report</button>
 
+{{--                    <div class="popup-form-row">--}}
+{{--                        <form method="post" action="/staff/staff_filter">--}}
+{{--                            {{csrf_field()}}--}}
+{{--                            <label>Position</label>--}}
+{{--                            <select name="position_id[]" id="product-add" required>--}}
+{{--                                @foreach($pos as $in)--}}
+{{--                                    <option value="{{$in->position}}">{{$in->position}} </option>--}}
+{{--                                @endforeach--}}
 
-                    </form>
-                </div>
+{{--                            </select>--}}
+{{--                            --}}{{--                        <label>City</label>--}}
+{{--                            --}}{{--                        <select name="city_id[]" id="product-add" required>--}}
+{{--                            --}}{{--                            @foreach($cit as $c)--}}
+{{--                            --}}{{--                                <option value="{{$c->city}}">{{$c->city}} </option>--}}
+{{--                            --}}{{--                            @endforeach--}}
 
+{{--                            --}}{{--                        </select>--}}
 
+{{--                            --}}{{--<p><input type="submit" name="submit_staff" class="btn btn-info" value="Submit Type" /></p>--}}
+{{--                            <button type="submit" name="submin_staff" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit Staff</button>--}}
+{{--                            @endif--}}
+
+{{--                        </form>--}}
+{{--                    </div>--}}
 
                     <div class="table-heading-black">
                         <div class="table-section-small">Номер поля</div>
