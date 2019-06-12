@@ -40,6 +40,12 @@ Route::get('/technic', 'TechnicController@index');
 
 Route::post('/technic/branch_filter', 'TechnicController@branch_filter');
 
+Route::post('/technic/gps_filter', 'TechnicController@gps_filter');
+
+Route::post('/technic/dut_filter', 'TechnicController@dut_filter');
+
+Route::post('/technic/drt_filter', 'TechnicController@drt_filter');
+
 Route::post('/technic/technic_filter', 'TechnicController@technic_filter');
 
 Route::get('/invoice', 'InvoiceController@index');

@@ -184,54 +184,40 @@ $role = new Role();
 
             <h3 align="center">Get Multiple Types And Branches</h3><br />
     <h4>Choose what you like to see</h4><br />
-                <div class="row page-titles">
-                    <form method="post" action="/technic/gps_filter">
-                        {{csrf_field()}}
-                        <p><input type="checkbox" name="gps[]" value="1" /> GPS is available</p>
-                        <p><input type="checkbox" name="gps[]" value="0" /> GPS is absent</p>
-                        <p><input type="submit" name="submit_gps" class="btn btn-info" value="Provide GPS Info" /></p>
-                    </form>
-                </div>
-                <div class="row page-titles">
-                    <form method="post" action="/technic/dut_filter">
-                        {{csrf_field()}}
-                        <p><input type="checkbox" name="dut[]" value="1" /> DUT is available</p>
-                        <p><input type="checkbox" name="dut[]" value="0" /> DUT is absent</p>
-                        <p><input type="submit" name="submit_gps" class="btn btn-info" value="Provide DUT Info" /></p>
-                    </form>
-                </div>
-                <div class="row page-titles">
-                    <form method="post" action="/technic/drt_filter">
-                        {{csrf_field()}}
-                        <p><input type="checkbox" name="drt[]" value="1" /> DRT is available</p>
-                        <p><input type="checkbox" name="drt[]" value="0" /> DRT is absent</p>
-                        <p><input type="submit" name="submit_gps" class="btn btn-info" value="Provide DRT Info" /></p>
-                    </form>
-                </div>
-                <div class="popup-form-row">
-        <form method="post" action="/technic/branch_filter">
-            {{csrf_field()}}
-            <p><input type="checkbox" name="branch[]" value="1" /> Vinnytsa</p>
-            <p><input type="checkbox" name="branch[]" value="2" /> Kherson</p>
-            <p><input type="checkbox" name="branch[]" value="3" /> Odessa</p>
-            <p><input type="submit" name="submit_branch" class="btn btn-info" value="Submit Branch" /></p>
-        </form>
-                </div>
-                <div class="popup-form-row">
-        <form method="post" action="/technic/technic_filter">
-            {{csrf_field()}}
-            <p><input type="checkbox" name="technic[]" value="Tipper" /> Tipper </p>
-            <p><input type="checkbox" name="technic[]" value="Loader" /> Loader </p>
-            <p><input type="checkbox" name="technic[]" value="Combine harvester" /> Combine harvester </p>
-            <p><input type="checkbox" name="technic[]" value="Tractor" /> Tractor </p>
-            <p><input type="checkbox" name="technic[]" value="Work Car" /> Work Car </p>
-            <p><input type="checkbox" name="technic[]" value="Sprinkler" /> Sprinkler </p>
 
-            <p><input type="submit" name="submit_technic" class="btn btn-info" value="Submit Type" /></p>
+                <a href = "/technic"><button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Back to All</button></a>
+{{--                <div class="row page-titles">--}}
+{{--                    <form method="post" action="/technic/gps_filter">--}}
+{{--                        {{csrf_field()}}--}}
+{{--                        <p><input type="checkbox" name="gps[]" value="1" /> GPS is available</p>--}}
+{{--                        <p><input type="checkbox" name="gps[]" value="0" /> GPS is absent</p>--}}
+{{--                        <p><input type="submit" name="submit_gps" class="btn btn-info" value="Provide GPS Info" /></p>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--                <div class="popup-form-row">--}}
+{{--        <form method="post" action="/technic/branch_filter">--}}
+{{--            {{csrf_field()}}--}}
+{{--            <p><input type="checkbox" name="branch[]" value="1" /> Vinnytsa</p>--}}
+{{--            <p><input type="checkbox" name="branch[]" value="2" /> Kherson</p>--}}
+{{--            <p><input type="checkbox" name="branch[]" value="3" /> Odessa</p>--}}
+{{--            <p><input type="submit" name="submit_branch" class="btn btn-info" value="Submit Branch" /></p>--}}
+{{--        </form>--}}
+{{--                </div>--}}
+{{--                <div class="popup-form-row">--}}
+{{--        <form method="post" action="/technic/technic_filter">--}}
+{{--            {{csrf_field()}}--}}
+{{--            <p><input type="checkbox" name="technic[]" value="Tipper" /> Tipper </p>--}}
+{{--            <p><input type="checkbox" name="technic[]" value="Loader" /> Loader </p>--}}
+{{--            <p><input type="checkbox" name="technic[]" value="Combine harvester" /> Combine harvester </p>--}}
+{{--            <p><input type="checkbox" name="technic[]" value="Tractor" /> Tractor </p>--}}
+{{--            <p><input type="checkbox" name="technic[]" value="Work Car" /> Work Car </p>--}}
+{{--            <p><input type="checkbox" name="technic[]" value="Sprinkler" /> Sprinkler </p>--}}
+
+{{--            <p><input type="submit" name="submit_technic" class="btn btn-info" value="Submit Type" /></p>--}}
 
 
-        </form>
-                </div>
+{{--        </form>--}}
+{{--                </div>--}}
 
                 <div class="table-heading-black">
                     <div class="table-section-small">#</div>
@@ -242,6 +228,7 @@ $role = new Role();
                     {{--@endif--}}
                     <div class="table-section">Condition</div>
                     <div class="table-section">Type</div>
+                    <div class="table-section">GPS Status</div>
                         <i class="fas fa-check"></i>
                     </div>
                     {{--@if($role->isAdmin()) --}}{{-- ADMIN ONLY --}}
@@ -262,6 +249,7 @@ $role = new Role();
                             {{--@endif--}}
                             <div class="table-section-small">{{ $t->condition or '?' }}</div>
                             <div class="table-section-small">{{ $t->type or '?' }}</div>
+                            <div class="table-section-small">{{ $t->gps_status or '?' }}</div>
 
 
                         </li>

@@ -67,6 +67,54 @@ class TechnicController extends Controller
 
     }
 
+    public function gps_filter()//аналогично для типов техники
+    {
+
+        $gps = request('gps');
+
+
+
+        $technic = DB::select(('SELECT * FROM technic_state() where gps_status_num = ?'), $gps);
+
+
+
+
+        return view('technic_gps', compact('technic'));
+
+    }
+
+    public function dut_filter()//аналогично для типов техники
+    {
+
+        $dut = request('dut');
+
+
+
+        $technic = DB::select(('SELECT * FROM technic_state() where dut_status_num = ?'), $dut);
+
+
+
+
+        return view('technic_dut', compact('technic'));
+
+    }
+
+    public function drt_filter()//аналогично для типов техники
+    {
+
+        $drt = request('drt');
+
+
+
+        $technic = DB::select(('SELECT * FROM technic_state() where drt_status_num = ?'), $drt);
+
+
+
+
+        return view('technic_drt', compact('technic'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
