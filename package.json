@@ -20,7 +20,7 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "imagemin-pngquant": "^5.0.1",
     "pngquant-bin": "^3.1.1",
     "vue-chartjs": "^3.4.2"
